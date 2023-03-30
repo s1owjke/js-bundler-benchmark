@@ -89,16 +89,22 @@ const performBuild = (bundler) => {
 
 (async () => {
   try {
-    const { project, preset = SUPPORTED_PRESETS.babel } = getArguments();
+    const {
+      project,
+      preset = SUPPORTED_PRESETS.babel,
+      entrypoint = 'src/index.tsx',
+    } = getArguments();
 
     if (!project || !fse.pathExistsSync(`./projects/${project}`)) {
       throw new Error('Invalid project');
     } else if (!Object.values(SUPPORTED_PRESETS).includes(preset)) {
       throw new Error('Unsupported preset');
+    } else if (!fse.pathExistsSync(`./projects/${project}/${entrypoint}`)) {
+      throw new Error(`Invalid entrypoint ${entrypoint}`);
     }
 
     const buildPaths = {
-      appEntrypoint: `./projects/${project}/src/index.tsx`,
+      appEntrypoint: `./projects/${project}/${entrypoint}`,
       appBuild: './builds/build-webpack',
     };
 

@@ -4,16 +4,18 @@ import { getArguments, getMetrics } from './utils.js';
 
 (async () => {
   try {
-    const { project, preset } = getArguments();
+    const { project, preset, entrypoint = 'src/index.tsx' } = getArguments();
 
     if (preset) {
       throw new Error("Presets aren't supported");
     } else if (!project || !fse.pathExistsSync(`./projects/${project}`)) {
       throw new Error('Invalid project');
+    } else if (!fse.pathExistsSync(`./projects/${project}/${entrypoint}`)) {
+      throw new Error(`Invalid entrypoint ${entrypoint}`);
     }
 
     const buildPaths = {
-      appEntrypoint: `./projects/${project}/src/index.tsx`,
+      appEntrypoint: `./projects/${project}/${entrypoint}`,
       appBuild: './builds/build-parcel',
     };
 
