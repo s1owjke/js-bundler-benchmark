@@ -3,7 +3,7 @@ import fse from 'fs-extra';
 import zlib from 'zlib';
 
 const KEY_REGEX = /^--(.*)/;
-const SIZE_UNITS = ["B", "KiB", "MiB"];
+const SIZE_UNITS = ['B', 'KiB', 'MiB'];
 
 const formatTime = (ms) => `${(ms / 1000).toFixed(3)} sec`;
 
