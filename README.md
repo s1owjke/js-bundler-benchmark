@@ -2,12 +2,13 @@
 
 Performance benchmark for most popular javascript bundlers in various configurations
 
-- esbuild
-- parcel (babel + terser)
-- rollup (babel + terser, esbuild, swc)
-- webpack (babel + terser, esbuild, swc)
+- [esbuild](https://esbuild.github.io/)
+- [parcel](https://parceljs.org/) (babel + terser)
+- [rollup](https://rollupjs.org/) (babel + terser, esbuild, swc)
+- [webpack](https://webpack.js.org/) (babel + terser, esbuild, swc)
 
-Available test projects (all of them use React):
+Available test projects (all of them based on React):
+
 - empty project
 - project containing five big libraries
 - all components from Material UI
@@ -15,7 +16,9 @@ Available test projects (all of them use React):
 
 ## Results
 
-All tests were done on a 6-core 2019 MacBook Pro with 16gb of RAM, Mac OS 11.5.2 and Node 16.20.0
+All tests were done on a 6-core 2019 MacBook Pro with 16gb of RAM, Mac OS 11.5.2 and Node 16.20.0, production build, no cache, configs are as close as possible
+
+![Build time in sec](images/build-time-in-sec.png "Build time in sec")
 
 Time in sec (average time for 3 runs)
 
@@ -80,3 +83,5 @@ Examples
 npm run build:esbuild -- --project react-empty --entrypoint src/index.tsx
 npm run build:webpack -- --project react-empty --preset swc --entrypoint src/index.tsx
 ```
+
+Don't forget to add `--` after npm script to [pass arguments](https://docs.npmjs.com/cli/v6/commands/npm-run-script#description)
