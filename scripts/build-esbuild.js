@@ -6,10 +6,10 @@ import { getArguments, getMetrics } from './utils.js';
   try {
     const { project, preset, entrypoint = 'src/index.tsx' } = getArguments();
 
-    if (preset) {
-      throw new Error('Presets aren\'t supported');
-    } else if (!project || !fse.pathExistsSync(`./projects/${project}`)) {
+    if (!project || !fse.pathExistsSync(`./projects/${project}`)) {
       throw new Error('Invalid project');
+    } else if (preset) {
+      throw new Error("Presets aren't supported");
     } else if (!fse.pathExistsSync(`./projects/${project}/${entrypoint}`)) {
       throw new Error(`Invalid entrypoint ${entrypoint}`);
     }

@@ -18,7 +18,7 @@ export const getArguments = () => {
   return args.reduce((acc, arg, index, args) => {
     if (!KEY_REGEX.test(arg)) {
       return acc;
-    } else if (!args[index + 1] || args[index + 1] && KEY_REGEX.test(args[index + 1])) {
+    } else if (!args[index + 1] || (args[index + 1] && KEY_REGEX.test(args[index + 1]))) {
       return { ...acc, [arg.slice(2)]: true };
     }
 
@@ -29,20 +29,23 @@ export const getArguments = () => {
 export const getMetrics = (startTime, buildPath) => {
   const elapsedTime = Date.now() - startTime;
 
-  const { size, sizeGzip } = fse.readdirSync(buildPath).reduce((acc, filePath) => {
-    const fullPath = path.join(buildPath, filePath);
+  const { size, sizeGzip } = fse.readdirSync(buildPath).reduce(
+    (acc, filePath) => {
+      const fullPath = path.join(buildPath, filePath);
 
-    if (fse.lstatSync(fullPath).isFile()) {
-      const contents = fse.readFileSync(fullPath);
+      if (fse.lstatSync(fullPath).isFile()) {
+        const contents = fse.readFileSync(fullPath);
 
-      return {
-        size: acc.size + Buffer.byteLength(contents),
-        sizeGzip: acc.sizeGzip + zlib.gzipSync(contents).length,
+        return {
+          size: acc.size + Buffer.byteLength(contents),
+          sizeGzip: acc.sizeGzip + zlib.gzipSync(contents).length,
+        };
       }
-    }
 
-    return acc;
-  }, { size: 0, sizeGzip: 0});
+      return acc;
+    },
+    { size: 0, sizeGzip: 0 }
+  );
 
   const lines = [
     `elapsed time: ${formatTime(elapsedTime)}`,

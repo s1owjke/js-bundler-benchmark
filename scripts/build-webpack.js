@@ -89,11 +89,7 @@ const performBuild = (bundler) => {
 
 (async () => {
   try {
-    const {
-      project,
-      preset = SUPPORTED_PRESETS.babel,
-      entrypoint = 'src/index.tsx',
-    } = getArguments();
+    const { project, preset = SUPPORTED_PRESETS.babel, entrypoint = 'src/index.tsx' } = getArguments();
 
     if (!project || !fse.pathExistsSync(`./projects/${project}`)) {
       throw new Error('Invalid project');
@@ -114,7 +110,9 @@ const performBuild = (bundler) => {
 
     const bundler = webpack({
       mode: 'production',
-      entry: { index: buildPaths.appEntrypoint },
+      entry: {
+        index: buildPaths.appEntrypoint,
+      },
       output: {
         path: path.resolve(buildPaths.appBuild),
         filename: '[name].js',

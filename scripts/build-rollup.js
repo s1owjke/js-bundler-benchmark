@@ -65,11 +65,7 @@ const resolvePlugins = (preset) => {
 
 (async () => {
   try {
-    const {
-      project,
-      preset = SUPPORTED_PRESETS.babel,
-      entrypoint = 'src/index.tsx',
-    } = getArguments();
+    const { project, preset = SUPPORTED_PRESETS.babel, entrypoint = 'src/index.tsx' } = getArguments();
 
     if (!project || !fse.pathExistsSync(`./projects/${project}`)) {
       throw new Error('Invalid project');

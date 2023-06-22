@@ -11,7 +11,8 @@
     "build:esbuild": "node ./scripts/build-esbuild.js",
     "build:parcel": "node ./scripts/build-parcel.js",
     "build:rollup": "node ./scripts/build-rollup.js",
-    "build:webpack": "node ./scripts/build-webpack.js"
+    "build:webpack": "node ./scripts/build-webpack.js",
+    "prettier:write": "prettier --write ./scripts/*.js"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
@@ -29,6 +30,7 @@
     "esbuild": "^0.17.11",
     "esbuild-loader": "^3.0.1",
     "fs-extra": "^11.1.0",
+    "prettier": "2.8.8",
     "rollup": "^3.19.1",
     "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-swc3": "^0.8.0",
