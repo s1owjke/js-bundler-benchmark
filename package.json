@@ -11,6 +11,7 @@
     "build:esbuild": "node ./scripts/build-esbuild.js",
     "build:parcel": "node ./scripts/build-parcel.js",
     "build:rollup": "node ./scripts/build-rollup.js",
+    "build:rspack": "node ./scripts/build-rspack.js",
     "build:webpack": "node ./scripts/build-webpack.js",
     "prettier:write": "prettier --write ./scripts/*.js"
   },
@@ -26,6 +27,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.0",
+    "@rspack/core": "^0.2.8",
     "babel-loader": "^9.1.2",
     "esbuild": "^0.17.11",
     "esbuild-loader": "^3.0.1",
