@@ -46,6 +46,11 @@ const performBuild = (compiler) => {
         filename: '[name].js',
       },
       target: ['web', 'es2015'],
+      builtins: {
+        define: {
+          'process.env.NODE_ENV': JSON.stringify('production'),
+        },
+      },
     });
 
     await performBuild(compiler);
