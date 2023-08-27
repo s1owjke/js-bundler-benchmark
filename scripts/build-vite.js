@@ -1,8 +1,6 @@
-import path from 'path';
 import fse from 'fs-extra';
 import { build } from 'vite';
 import react from '@vitejs/plugin-react';
-import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import { getArguments, getMetrics } from './utils.js';
 
@@ -30,26 +28,19 @@ import { getArguments, getMetrics } from './utils.js';
     await build({
       mode: 'production',
       build: {
-        lib: {
-          fileName: 'index',
-          entry: buildPaths.appEntrypoint,
-          formats: ['cjs'],
-        },
         outDir: buildPaths.appBuild,
         minify: true,
         target: 'es2015',
         rollupOptions: {
+          input: buildPaths.appEntrypoint,
+          output: {
+            entryFileNames: `[name].js`,
+          },
           plugins: [
             resolve({
               preferBuiltins: true,
               browser: true,
               extensions: ['.js', '.jsx', '.ts', '.tsx'],
-            }),
-            replace({
-              preventAssignment: true,
-              values: {
-                'process.env.NODE_ENV': JSON.stringify('production'),
-              },
             }),
           ],
         },
@@ -61,8 +52,6 @@ import { getArguments, getMetrics } from './utils.js';
       ],
       logLevel: 'error',
     });
-
-    await fse.move(path.join(buildPaths.appBuild, 'index.cjs'), path.join(buildPaths.appBuild, 'index.js'));
 
     console.log(getMetrics(startTime, buildPaths.appBuild));
     process.exit(0);
