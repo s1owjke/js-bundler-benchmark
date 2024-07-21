@@ -21,6 +21,8 @@ import { getArguments, getMetrics } from './utils.js';
 
     await fse.emptydir(buildPaths.appBuild);
 
+    await fse.writeFile(`./projects/${project}/.env`, 'NODE_ENV=production');
+
     const configFiles = {
       [`./projects/${project}/.babelrc`]: {
         compact: true,
@@ -79,6 +81,8 @@ import { getArguments, getMetrics } from './utils.js';
     await bundler.run();
 
     console.log(getMetrics(startTime, buildPaths.appBuild));
+
+    await fse.remove(`./projects/${project}/.env`);
 
     for await (const configFile of Object.keys(configFiles)) {
       await fse.remove(configFile);
