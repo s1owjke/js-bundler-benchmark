@@ -1,6 +1,6 @@
 import path from 'path';
 import fse from 'fs-extra';
-import { createCompiler, Compiler } from '@rspack/core';
+import { rspack, Compiler } from '@rspack/core';
 import { errorToString, getArguments, getMetrics } from './utils';
 
 const performBuild = (compiler: Compiler) => {
@@ -36,7 +36,7 @@ const performBuild = (compiler: Compiler) => {
 
     const startTime = Date.now();
 
-    const compiler = createCompiler({
+    const compiler = rspack({
       mode: 'production',
       entry: {
         index: buildPaths.appEntrypoint,
@@ -45,11 +45,36 @@ const performBuild = (compiler: Compiler) => {
         path: path.resolve(buildPaths.appBuild),
         filename: '[name].js',
       },
-      target: ['web', 'es2015'],
-      builtins: {
-        define: {
-          'process.env.NODE_ENV': JSON.stringify('production'),
-        },
+      resolve: {
+        modules: ['node_modules'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+      module: {
+        rules: [
+          {
+            test: /\.(js|jsx|ts|tsx)$/,
+            exclude: /node_modules/,
+            loader: 'builtin:swc-loader',
+            options: {
+              jsc: {
+                target: 'es2015',
+                parser: {
+                  syntax: 'typescript',
+                  tsx: true,
+                },
+                transform: {
+                  react: {
+                    runtime: 'automatic',
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+      optimization: {
+        minimize: true,
+        minimizer: [new rspack.SwcJsMinimizerRspackPlugin()],
       },
     });
 
