@@ -18,54 +18,54 @@ Available test projects (all of them based on React):
 
 ## Results
 
-All tests were done on a 6-core 2019 MacBook Pro with 16gb of RAM, Mac OS 11.5.2 and Node 16.20.0, production build, no cache, configs are as close as possible
+All tests were done on 2023 MacBook Pro 12-core M2 Pro with 32gb of RAM, Mac OS 11.5.2 and Node 20.9.0, production build, no cache, configs are as close as possible
 
 ![Build time in sec](images/build-time-in-sec.png "Build time in sec")
 
-Time in sec (average time for 3 runs)
+Time in sec (average time for 5 runs)
 
-|                             | **Empty** | **Libraries** | **Mui** | **Synthetic** |
-|-----------------------------|-----------|---------------|---------|---------------|
-| **Esbuild**                 | 0.046     | 0.142         | 0.192   | 0.685         |
-| **Parcel: babel + terser**  | 3.737     | 11.529        | 8.892   | 57.232        |
-| **Rollup: babel + terser**  | 3.121     | 13.056        | 9.495   | 37.689        |
-| **Rollup: esbuild**         | 1.874     | 5.553         | 5.746   | 14.612        |
-| **Rollup: swc**             | 1.788     | 5.966         | 5.802   | 14.644        |
-| **Rspack**                  | 0.192     | 1.308         | 0.607   | 5.730         |
-| **Vite**                    | 1.418     | 6.632         | 7.957   | 36.735        |
-| **Webpack: babel + terser** | 2.471     | 11.529        | 6.406   | 23.889        |
-| **Webpack: esbuild**        | 0.808     | 3.145         | 2.665   | 8.798         |
-| **Webpack: swc**            | 0.849     | 4.033         | 2.927   | 9.134         |
+|                             | **react-empty** | **react-libraries** | **react-mui** | **react-synthetic** |
+|-----------------------------| --------------- | ------------------- | ------------- | ------------------- |
+| **Esbuild**                 | 0.025           | 0.086               | 0.097         | 0.371               |
+| **Parcel: babel + terser**  | 1.075           | 4.146               | 2.790         | 17.396              |
+| **Rollup: babel + terser**  | 1.337           | 5.516               | 4.285         | 14.419              |
+| **Rollup: esbuild**         | 0.758           | 2.280               | 2.608         | 6.001               |
+| **Rollup: swc**             | 0.808           | 2.992               | 2.968         | 5.809               |
+| **Rspack**                  | 0.109           | 0.649               | 0.352         | 3.464               |
+| **Vite**                    | 0.463           | 2.126               | 1.631         | 6.287               |
+| **Webpack: babel + terser** | 0.969           | 5.068               | 2.787         | 8.951               |
+| **Webpack: esbuild**        | 0.337           | 1.469               | 1.149         | 3.269               |
+| **Webpack: swc**            | 0.377           | 1.848               | 1.319         | 3.463               |
 
 Bundle size in KiB
 
-|                             | **Empty** | **Libraries** | **Mui** | **Synthetic** |
-|-----------------------------|-----------|---------------|---------|---------------|
-| **Esbuild**                 | 164.60    | 1239.04       | 607.99  | 1008.50       |
-| **Parcel: babel + terser**  | 348.28    | 1546.24       | 950.09  | 1351.68       |
-| **Rollup: babel + terser**  | 157.85    | 1454.08       | 592.64  | 786.78        |
-| **Rollup: esbuild**         | 163.61    | 1239.04       | 621.77  | 816.58        |
-| **Rollup: swc**             | 166.95    | 1351.68       | 712.35  | 1064.96       |
-| **Rspack**                  | 167.08    | 1382.40       | 755.95  | 1638.40       |
-| **Vite**                    | 159.97    | 1239.04       | 598.18  | 832.59        |
-| **Webpack: babel + terser** | 158.33    | 1464.32       | 593.95  | 868.48        |
-| **Webpack: esbuild**        | 166.17    | 1617.92       | 613.37  | 891.19        |
-| **Webpack: swc**            | 163.00    | 1454.08       | 600.74  | 878.15        |
+|                             | **react-empty** | **react-libraries** | **react-mui** | **react-synthetic** |
+|-----------------------------| --------------- | ------------------- | ------------- | ------------------- |
+| **Esbuild**                 | 164.89          | 1307.66             | 666.31        | 1008.77             |
+| **Parcel: babel + terser**  | 169.95          | 1435.18             | 719.28        | 1169.15             |
+| **Rollup: babel + terser**  | 158.20          | 1288.17             | 618.09        | 787.13              |
+| **Rollup: esbuild**         | 163.90          | 1306.80             | 670.02        | 816.89              |
+| **Rollup: swc**             | 157.32          | 1272.01             | 612.17        | 791.13              |
+| **Rspack**                  | 167.21          | 1448.15             | 780.15        | 1637.96             |
+| **Vite**                    | 160.40          | 1301.38             | 624.26        | 833.02              |
+| **Webpack: babel + terser** | 158.58          | 1531.55             | 624.99        | 868.74              |
+| **Webpack: esbuild**        | 163.74          | 1686.67             | 646.32        | 888.71              |
+| **Webpack: swc**            | 160.60          | 1527.33             | 627.58        | 875.74              |
 
 Bundle size after gzip in KiB
 
-|                             | **Empty** | **Libraries** | **Mui** | **Synthetic** |
-|-----------------------------|-----------|---------------|---------|---------------|
-| **Esbuild**                 | 54.75     | 367.50        | 183.51  | 132.16        |
-| **Parcel: babel + terser**  | 106.91    | 424.13        | 264.39  | 139.05        |
-| **Rollup: babel + terser**  | 52.81     | 353.12        | 173.57  | 67.34         |
-| **Rollup: esbuild**         | 54.68     | 368.10        | 185.70  | 84.23         |
-| **Rollup: swc**             | 54.24     | 368.08        | 190.88  | 93.57         |
-| **Rspack**                  | 54.38     | 376.50        | 199.42  | 140.82        |
-| **Vite**                    | 53.29     | 366.32        | 179.32  | 82.73         |
-| **Webpack: babel + terser** | 52.90     | 407.58        | 175.36  | 84.42         |
-| **Webpack: esbuild**        | 56.04     | 445.32        | 185.35  | 86.71         |
-| **Webpack: swc**            | 54.49     | 409.35        | 178.29  | 93.34         |
+|                             | **react-empty** | **react-libraries** | **react-mui** | **react-synthetic** |
+|-----------------------------| --------------- | ------------------- | ------------- | ------------------- |
+| **Esbuild**                 | 54.87           | 382.66              | 198.44        | 132.23              |
+| **Parcel: babel + terser**  | 55.16           | 387.85              | 201.28        | 87.32               |
+| **Rollup: babel + terser**  | 52.98           | 368.17              | 181.60        | 67.54               |
+| **Rollup: esbuild**         | 54.81           | 383.57              | 201.60        | 84.35               |
+| **Rollup: swc**             | 52.53           | 365.00              | 180.93        | 66.97               |
+| **Rspack**                  | 54.45           | 391.42              | 207.35        | 140.92              |
+| **Vite**                    | 53.50           | 381.24              | 187.90        | 82.94               |
+| **Webpack: babel + terser** | 53.04           | 423.12              | 183.86        | 84.55               |
+| **Webpack: esbuild**        | 55.12           | 460.51              | 194.42        | 86.09               |
+| **Webpack: swc**            | 53.63           | 423.99              | 185.15        | 92.34               |
 
 ## How to run it
 
