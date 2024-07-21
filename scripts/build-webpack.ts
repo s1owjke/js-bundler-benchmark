@@ -1,16 +1,22 @@
 import path from 'path';
 import fse from 'fs-extra';
-import webpack from 'webpack';
+import { webpack, Compiler } from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
-import { getArguments, getMetrics } from './utils.js';
+import { errorToString, getArguments, getMetrics } from './utils';
 
 const SUPPORTED_PRESETS = {
   babel: 'babel',
   esbuild: 'esbuild',
   swc: 'swc',
+} as const;
+
+type SupportedPreset = keyof typeof SUPPORTED_PRESETS;
+
+const isSupportedPreset = (preset: unknown): preset is SupportedPreset => {
+  return typeof preset === 'string' && Object.values<string>(SUPPORTED_PRESETS).includes(preset);
 };
 
-const resolveBundler = (preset) => {
+const resolveBundler = (preset: SupportedPreset) => {
   switch (preset) {
     case SUPPORTED_PRESETS.babel:
       return {
@@ -48,7 +54,7 @@ const resolveBundler = (preset) => {
   }
 };
 
-const resolveTerserConfig = (preset) => {
+const resolveTerserConfig = (preset: SupportedPreset) => {
   switch (preset) {
     case SUPPORTED_PRESETS.babel:
       return {
@@ -71,9 +77,9 @@ const resolveTerserConfig = (preset) => {
   }
 };
 
-const performBuild = (bundler) => {
+const performBuild = (compiler: Compiler) => {
   return new Promise((resolve, reject) => {
-    bundler.run((err, stats) => {
+    compiler.run((err, stats) => {
       if (err) {
         return reject(err);
       }
@@ -93,7 +99,7 @@ const performBuild = (bundler) => {
 
     if (!project || !fse.pathExistsSync(`./projects/${project}`)) {
       throw new Error('Invalid project');
-    } else if (!Object.values(SUPPORTED_PRESETS).includes(preset)) {
+    } else if (!isSupportedPreset(preset)) {
       throw new Error('Unsupported preset');
     } else if (!fse.pathExistsSync(`./projects/${project}/${entrypoint}`)) {
       throw new Error(`Invalid entrypoint ${entrypoint}`);
@@ -140,8 +146,8 @@ const performBuild = (bundler) => {
 
     console.log(getMetrics(startTime, buildPaths.appBuild));
     process.exit(0);
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error(errorToString(error));
     process.exit(1);
   }
 })();

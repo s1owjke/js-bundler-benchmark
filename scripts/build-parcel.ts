@@ -1,6 +1,6 @@
 import fse from 'fs-extra';
 import { Parcel } from '@parcel/core';
-import { getArguments, getMetrics } from './utils.js';
+import { errorToString, getArguments, getMetrics } from './utils';
 
 (async () => {
   try {
@@ -91,8 +91,8 @@ import { getArguments, getMetrics } from './utils.js';
     await fse.remove(`./projects/${project}/.parcel-cache`);
 
     process.exit(0);
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error(errorToString(error));
     process.exit(1);
   }
 })();

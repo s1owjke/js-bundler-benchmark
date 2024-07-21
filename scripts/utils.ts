@@ -5,14 +5,14 @@ import zlib from 'zlib';
 const KEY_REGEX = /^--(.*)/;
 const SIZE_UNITS = ['B', 'KiB', 'MiB'];
 
-const formatTime = (ms) => `${(ms / 1000).toFixed(3)} sec`;
+const formatTime = (ms: number) => `${(ms / 1000).toFixed(3)} sec`;
 
-const formatSize = (bytes) => {
+const formatSize = (bytes: number) => {
   const index = Math.floor(Math.log(bytes) / Math.log(1024));
   return `${(bytes / Math.pow(1024, index)).toFixed(2)} ${SIZE_UNITS[index]}`;
 };
 
-export const getArguments = () => {
+export const getArguments = (): Record<string, boolean | string> => {
   const args = process.argv.slice(2);
 
   return args.reduce((acc, arg, index, args) => {
@@ -26,7 +26,7 @@ export const getArguments = () => {
   }, {});
 };
 
-export const getMetrics = (startTime, buildPath) => {
+export const getMetrics = (startTime: number, buildPath: string) => {
   const elapsedTime = Date.now() - startTime;
 
   const { size, sizeGzip } = fse.readdirSync(buildPath).reduce(
@@ -54,4 +54,8 @@ export const getMetrics = (startTime, buildPath) => {
   ];
 
   return lines.join(', ');
+};
+
+export const errorToString = (error: unknown) => {
+  return error instanceof Error ? error.message : 'Something went wrong';
 };

@@ -1,20 +1,20 @@
 {
   "name": "js-bundler-benchmark",
   "version": "0.1.0",
-  "type": "module",
   "author": "s1owjke",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/s1owjke/js-bundler-benchmark.git"
   },
   "scripts": {
-    "build:esbuild": "node ./scripts/build-esbuild.js",
-    "build:parcel": "node ./scripts/build-parcel.js",
-    "build:rollup": "node ./scripts/build-rollup.js",
-    "build:rspack": "node ./scripts/build-rspack.js",
-    "build:vite": "node ./scripts/build-vite.js",
-    "build:webpack": "node ./scripts/build-webpack.js",
-    "prettier:write": "prettier --write ./scripts/*.js"
+    "build:esbuild": "ts-node ./scripts/build-esbuild.ts",
+    "build:parcel": "ts-node ./scripts/build-parcel.ts",
+    "build:rollup": "ts-node ./scripts/build-rollup.ts",
+    "build:rspack": "ts-node ./scripts/build-rspack.ts",
+    "build:vite": "ts-node ./scripts/build-vite.ts",
+    "build:webpack": "ts-node ./scripts/build-webpack.ts",
+    "typecheck": "tsc --noEmit",
+    "prettier:write": "prettier --write ./scripts/*.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
@@ -28,8 +28,9 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.0",
-    "@vitejs/plugin-react": "^4.0.4",
     "@rspack/core": "^0.2.8",
+    "@types/fs-extra": "^11.0.4",
+    "@vitejs/plugin-react": "^4.0.4",
     "babel-loader": "^9.1.2",
     "esbuild": "^0.17.11",
     "esbuild-loader": "^3.0.1",
@@ -37,9 +38,11 @@
     "prettier": "2.8.8",
     "rollup": "^3.19.1",
     "rollup-plugin-esbuild": "^5.0.0",
-    "rollup-plugin-swc3": "^0.8.0",
+    "rollup-plugin-swc3": "^0.11.2",
     "swc-loader": "^0.2.3",
     "terser-webpack-plugin": "^5.3.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
     "vite": "^4.4.9",
     "webpack": "^5.76.2"
   }

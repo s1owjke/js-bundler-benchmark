@@ -1,6 +1,6 @@
 import fse from 'fs-extra';
-import esbuild from 'esbuild';
-import { getArguments, getMetrics } from './utils.js';
+import { build } from 'esbuild';
+import { errorToString, getArguments, getMetrics } from './utils';
 
 (async () => {
   try {
@@ -23,7 +23,7 @@ import { getArguments, getMetrics } from './utils.js';
 
     const startTime = Date.now();
 
-    await esbuild.build({
+    await build({
       entryPoints: [buildPaths.appEntrypoint],
       outdir: buildPaths.appBuild,
       entryNames: '[name]',
@@ -35,8 +35,8 @@ import { getArguments, getMetrics } from './utils.js';
 
     console.log(getMetrics(startTime, buildPaths.appBuild));
     process.exit(0);
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error(errorToString(error));
     process.exit(1);
   }
 })();

@@ -2,7 +2,7 @@ import fse from 'fs-extra';
 import { build } from 'vite';
 import react from '@vitejs/plugin-react';
 import resolve from '@rollup/plugin-node-resolve';
-import { getArguments, getMetrics } from './utils.js';
+import { errorToString, getArguments, getMetrics } from './utils';
 
 (async () => {
   try {
@@ -55,8 +55,8 @@ import { getArguments, getMetrics } from './utils.js';
 
     console.log(getMetrics(startTime, buildPaths.appBuild));
     process.exit(0);
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error(errorToString(error));
     process.exit(1);
   }
 })();

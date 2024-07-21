@@ -1,9 +1,9 @@
 import path from 'path';
 import fse from 'fs-extra';
-import { createCompiler } from '@rspack/core';
-import { getArguments, getMetrics } from './utils.js';
+import { createCompiler, Compiler } from '@rspack/core';
+import { errorToString, getArguments, getMetrics } from './utils';
 
-const performBuild = (compiler) => {
+const performBuild = (compiler: Compiler) => {
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
@@ -57,8 +57,8 @@ const performBuild = (compiler) => {
 
     console.log(getMetrics(startTime, buildPaths.appBuild));
     process.exit(0);
-  } catch (e) {
-    console.error(e.message);
+  } catch (error) {
+    console.error(errorToString(error));
     process.exit(1);
   }
 })();
