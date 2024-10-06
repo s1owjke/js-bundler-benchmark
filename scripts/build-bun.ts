@@ -25,6 +25,7 @@ import { errorToString, getArguments, getMetrics } from './utils';
     await Bun.build({
       entrypoints: [buildPaths.appEntrypoint],
       outdir: buildPaths.appBuild,
+      naming: '[name].[ext]',
       minify: true,
       define: {
         'process.env.NODE_ENV': JSON.stringify('production'),
