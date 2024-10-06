@@ -7,6 +7,7 @@
     "url": "git+https://github.com/s1owjke/js-bundler-benchmark.git"
   },
   "scripts": {
+    "build:bun": "bun run ./scripts/build-bun.ts",
     "build:esbuild": "ts-node ./scripts/build-esbuild.ts",
     "build:parcel": "ts-node ./scripts/build-parcel.ts",
     "build:rollup": "ts-node ./scripts/build-rollup.ts",
@@ -30,9 +31,11 @@
     "@rollup/plugin-replace": "^5.0.7",
     "@rollup/plugin-terser": "^0.4.4",
     "@rspack/core": "^0.7.5",
+    "@types/bun": "^1.1.10",
     "@types/fs-extra": "^11.0.4",
     "@vitejs/plugin-react": "^4.3.1",
     "babel-loader": "^9.1.3",
+    "bun": "^1.1.29",
     "esbuild": "^0.23.0",
     "esbuild-loader": "^4.2.2",
     "fs-extra": "^11.2.0",
