@@ -21,7 +21,7 @@ Available test projects (all of them based on React):
 
 All tests were done on 2023 MacBook Pro 12-core M2 Pro with 32gb of RAM, Mac OS 15.0 and Node 20.17.0, production build, no cache, configs are as close as possible
 
-![Build time in sec](images/build-time-in-sec.png "Build time in sec")
+![Build time in sec](images/build-time-in-sec.svg "Build time in sec")
 
 Time in sec (average time for 5 runs)
 
