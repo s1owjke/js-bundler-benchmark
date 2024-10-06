@@ -7,7 +7,7 @@
     "url": "git+https://github.com/s1owjke/js-bundler-benchmark.git"
   },
   "scripts": {
-    "build:bun": "bun run ./scripts/build-bun.ts",
+    "build:bun": "BUN_ENV=production bun run ./scripts/build-bun.ts",
     "build:esbuild": "ts-node ./scripts/build-esbuild.ts",
     "build:parcel": "ts-node ./scripts/build-parcel.ts",
     "build:rollup": "ts-node ./scripts/build-rollup.ts",
