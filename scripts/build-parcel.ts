@@ -24,19 +24,17 @@ import { errorToString, getArguments, getMetrics } from './utils';
     await fse.writeFile(`./projects/${project}/.env`, 'NODE_ENV=production');
 
     const configFiles = {
-      [`./projects/${project}/.babelrc`]: {
-        compact: true,
-      },
       [`./projects/${project}/.parcelrc`]: {
         bundler: '@parcel/bundler-default',
         transformers: {
+          'types:*.{ts,tsx}': ['@parcel/transformer-typescript-types'],
           '*.{js,jsx,mjs,ts,tsx}': ['@parcel/transformer-babel', '@parcel/transformer-js'],
           'url:*': ['...', '@parcel/transformer-raw'],
         },
         namers: ['@parcel/namer-default'],
         runtimes: ['@parcel/runtime-js'],
         optimizers: {
-          '*.{js,mjs,cjs}': ['@parcel/optimizer-terser'],
+          '*.{js,mjs,cjs}': ['@parcel/optimizer-swc'],
         },
         packagers: {
           '*.{js,mjs,cjs}': '@parcel/packager-js',
@@ -48,11 +46,6 @@ import { errorToString, getArguments, getMetrics } from './utils';
         },
         resolvers: ['@parcel/resolver-default'],
         reporters: [],
-      },
-      [`./projects/${project}/.terserrc`]: {
-        format: {
-          comments: false,
-        },
       },
     };
 
