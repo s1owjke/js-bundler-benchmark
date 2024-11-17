@@ -14,3 +14,5 @@ builds
 
 # Other
 .parcel-cache
+.env
+.parcelrc
