@@ -4,7 +4,7 @@ Performance benchmark for most popular javascript bundlers in various configurat
 
 - [bun](https://bun.sh/)
 - [esbuild](https://esbuild.github.io/)
-- [parcel](https://parceljs.org/) (babel + terser)
+- [parcel](https://parceljs.org/) (swc)
 - [rollup](https://rollupjs.org/) (babel + terser, esbuild, swc)
 - [rspack](https://rspack.dev/) (swc)
 - [vite](https://vitejs.dev/) (esbuild)
@@ -29,7 +29,7 @@ Time in sec (average time for 5 runs)
 |-----------------------------|-----------------|---------------------|---------------|---------------------| 
 | **Bun**                     | 0.011           | 0.057               | 0.068         | 0.308               | 
 | **Esbuild**                 | 0.031           | 0.083               | 0.089         | 0.325               | 
-| **Parcel: babel + terser**  | 1.316           | 4.401               | 2.872         | 17.466              | 
+| **Parcel: swc**             | 0.637           | 2.083               | 1.919         | -                   | 
 | **Rollup: babel + terser**  | 1.458           | 6.134               | 4.350         | 14.006              | 
 | **Rollup: esbuild**         | 0.742           | 2.402               | 2.450         | 6.180               | 
 | **Rollup: swc**             | 0.795           | 2.887               | 2.932         | 5.880               | 
@@ -45,7 +45,7 @@ Bundle size in KiB
 |-----------------------------|-----------------|---------------------|---------------|---------------------| 
 | **Bun**                     | 163.22          | 1331.20             | 663.83        | 1024.00             | 
 | **Esbuild**                 | 164.86          | 1310.72             | 666.33        | 1008.75             | 
-| **Parcel: babel + terser**  | 169.44          | 1433.60             | 714.51        | 1167.36             | 
+| **Parcel: swc**             | 171.27          | 1423.36             | 709.86        | -                   | 
 | **Rollup: babel + terser**  | 157.56          | 1290.24             | 615.93        | 786.49              | 
 | **Rollup: esbuild**         | 163.65          | 1310.72             | 668.09        | 816.64              | 
 | **Rollup: swc**             | 157.16          | 1269.76             | 611.67        | 790.97              | 
@@ -61,7 +61,7 @@ Bundle size after gzip in KiB
 |-----------------------------|-----------------|---------------------|---------------|---------------------| 
 | **Bun**                     | 54.87           | 389.86              | 199.13        | 109.30              | 
 | **Esbuild**                 | 54.88           | 384.98              | 199.05        | 132.58              | 
-| **Parcel: babel + terser**  | 55.05           | 390.18              | 201.00        | 87.83               | 
+| **Parcel: swc**             | 55.62           | 388.56              | 200.76        | -                   | 
 | **Rollup: babel + terser**  | 52.84           | 369.56              | 180.82        | 68.29               | 
 | **Rollup: esbuild**         | 54.82           | 386.29              | 201.29        | 83.74               | 
 | **Rollup: swc**             | 52.47           | 366.57              | 180.96        | 67.83               | 
@@ -70,7 +70,6 @@ Bundle size after gzip in KiB
 | **Webpack: babel + terser** | 53.00           | 426.50              | 183.90        | 83.20               | 
 | **Webpack: esbuild**        | 55.13           | 464.27              | 195.34        | 85.44               | 
 | **Webpack: swc**            | 53.68           | 427.49              | 185.49        | 91.95               | 
-
 
 ## How to run it
 
