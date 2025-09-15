@@ -142,6 +142,10 @@ const performBuild = (compiler: Compiler) => {
       },
     });
 
+    if (!bundler) {
+      throw new Error('Failed to resolve compiler');
+    }
+
     await performBuild(bundler);
 
     console.log(getMetrics(startTime, buildPaths.appBuild));
